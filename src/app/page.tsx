@@ -140,61 +140,71 @@ export default function Home() {
     };
 
     return (
-        <main>
-            <h1>OpenAI Embeddings Playground</h1>
+  <main className="min-h-screen p-6 sm:p-10">
+    <div className="max-w-5xl mx-auto space-y-8">
 
-            <section>
-                <label htmlFor="api-key">OpenAI API Key</label>
-                <input
-                    id="api-key"
-                    type="password"
-                    placeholder="Enter your OpenAI API Key (e.g., sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)"
-                    value={apiKey}
-                    onChange={(e) => setApiKey(e.target.value)}
-                />
-                <p>Your API key is used only for generating embeddings and is not stored.</p>
-            </section>
+      <section className="bg-white shadow-md rounded-2xl p-6 space-y-4">
+        <label htmlFor="api-key" className="block  font-medium">
+          OpenAI API Key
+        </label>
+        <input
+          id="api-key"
+          type="password"
+          className="w-full rounded-lg border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="Enter your OpenAI API Key (e.g., sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)"
+          value={apiKey}
+          onChange={(e) => setApiKey(e.target.value)}
+        />
+        <p className="text-xs text-gray-500">
+          Your API key is used only for generating embeddings and is not stored.
+        </p>
+      </section>
 
-            <section>
-                <TextInputs texts={texts} onTextsChange={setTexts} />
-                <ModelSelect selectedModel={selectedModel} onModelChange={setSelectedModel} />
-                <MethodCheckboxes selectedMethods={selectedMethods} onMethodsChange={setSelectedMethods} />
-            </section>
+      <section className="bg-white shadow-md rounded-2xl p-6 space-y-6">
+        <TextInputs texts={texts} onTextsChange={setTexts} />
+        <ModelSelect selectedModel={selectedModel} onModelChange={setSelectedModel} />
+        <MethodCheckboxes selectedMethods={selectedMethods} onMethodsChange={setSelectedMethods} />
+      </section>
 
-            <section>
-                <button onClick={handleCompare} disabled={loading}>
-                    {loading ? "Comparing..." : "Compare Embeddings"}
-                </button>
-            </section>
+      <section className="text-center">
+        <button
+          onClick={handleCompare}
+          disabled={loading}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white !px-6 rounded-lg shadow-md transition duration-200 disabled:opacity-50"
+        >
+          {loading ? "Comparing..." : "Compare Embeddings"}
+        </button>
+      </section>
 
-            {error && (
-                <div style={{ color: 'red' }}>
-                    <strong>Error:</strong> {error}
-                </div>
-            )}
+      {error && (
+        <div className="bg-red-100 text-red-700 border border-red-300 rounded-lg p-4">
+          <strong>Error:</strong> {error}
+        </div>
+      )}
 
-            {results && (
-                <section>
-                    <ResultMatrix results={results} texts={texts} />
-                    <div>
-                        <h3>How to interpret the results:</h3>
-                        <ul>
-                            <li>
-                                <strong>Cosine Similarity:</strong> Values range from -1 to 1. Closer to 1 means texts are more similar.
-                            </li>
-                            <li>
-                                <strong>Dot Product:</strong> Higher values indicate greater similarity, especially for longer vectors.
-                            </li>
-                            <li>
-                                <strong>Euclidean Distance:</strong> Lower values indicate texts are closer in vector space.
-                            </li>
-                            <li>
-                                <strong>Manhattan Distance:</strong> Lower values indicate texts are closer in vector space.
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            )}
-        </main>
-    );
+      {results && (
+        <section className="bg-white shadow-md rounded-2xl p-6 space-y-6">
+          <ResultMatrix results={results} texts={texts} />
+          <div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">How to interpret the results:</h3>
+            <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
+              <li>
+                <strong>Cosine Similarity:</strong> Values range from -1 to 1. Closer to 1 means texts are more similar.
+              </li>
+              <li>
+                <strong>Dot Product:</strong> Higher values indicate greater similarity, especially for longer vectors.
+              </li>
+              <li>
+                <strong>Euclidean Distance:</strong> Lower values indicate texts are closer in vector space.
+              </li>
+              <li>
+                <strong>Manhattan Distance:</strong> Lower values indicate texts are closer in vector space.
+              </li>
+            </ul>
+          </div>
+        </section>
+      )}
+    </div>
+  </main>
+);
 }

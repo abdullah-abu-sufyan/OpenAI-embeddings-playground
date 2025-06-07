@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+body {
+  background-image: linear-gradient( 89.5deg,  rgba(131,204,255,1) 0.4%, rgba(66,144,251,1) 100.3% );
+}
+
+input, textarea {
+  @apply bg-slate-200 p-3 rounded-lg
+}
+
+button {
+  @apply bg-slate-800 p-3 text-white rounded-lg;
+  @apply cursor-pointer hover:bg-slate-700
+}
+
+   h1 {
+    /* @apply text-2xl font-bold; */
+  }
+
+  h2 {
+    /* @apply text-xl font-semibold; */
+  }
+  h3 {
+    /* @apply text-lg font-semibold; */
+  }
+  
+  p {
+    @apply text-base;
+  }

@@ -24,13 +24,18 @@ const MethodCheckboxes: React.FC<MethodCheckboxesProps> = ({ selectedMethods, on
     };
 
     return (
-        <div>
+        <div className='grid gap-3'>
             <h2>Similarity Methods</h2>
-            <div>
+            <div className='flex gap-3'>
                 {methods.map((method) => (
-                    <label key={method.value}>
+                    <label key={method.value}
+              className="flex items-center space-x-2  rounded-lg hover:bg-gray-50 cursor-pointer transition"
+
+          >
                         <input
                             type="checkbox"
+                  className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+
                             value={method.value}
                             checked={selectedMethods.includes(method.value)}
                             onChange={(e) => handleCheckboxChange(method.value, e.target.checked)}
