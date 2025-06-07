@@ -22,37 +22,54 @@ const ResultMatrix: React.FC<ResultMatrixProps> = ({ results, texts }) => {
     }
 
     return (
-        <div>
-            <h2>Comparison Results</h2>
+        <div className='grid gap-3'>
+            <h2 className='font-medium'>Comparison Results</h2>
+
             {results.map((result) => (
-                <div key={result.method}>
-                    <h3>{result.method.replace(/([A-Z])/g, ' $1').trim()}</h3>
-                    <p>{methodDescriptions[result.method]}</p>
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    {texts.map((_, i) => (
-                                        <th key={i}>Text {i + 1}</th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {result.matrix.map((row, rowIndex) => (
-                                    <tr key={rowIndex}>
-                                        <td>Text {rowIndex + 1}</td>
-                                        {row.map((value, colIndex) => (
-                                            <td key={colIndex}>
-                                                {rowIndex === colIndex ? '-' : value !== undefined ? value.toFixed(4) : 'N/A'}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+        <div key={result.method} className="space-y-4">
+      <div className="space-y-1">
+        <h3 className="text-xl font-semibold text-indigo-600">
+          {result.method.replace(/([A-Z])/g, ' $1').trim()}
+        </h3>
+        <p className="text-sm text-slate-600">{methodDescriptions[result.method]}</p>
+      </div>
+
+      <div className="overflow-x-auto rounded-lg border border-slate-200 shadow-sm">
+        <table className="min-w-full text-sm text-left text-slate-700">
+          <thead className="bg-slate-200">
+            <tr>
+              <th className="px-4 py-2 border-b border-slate-200">Inputs</th>
+              {texts.map((_, i) => (
+                <th key={i} className="px-4 py-2 border-b border-slate-200 text-center">
+                  Text {i + 1}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {result.matrix.map((row, rowIndex) => (
+              <tr key={rowIndex} className={rowIndex % 2 === 0 ? "" : "bg-slate-100"}>
+                <td className="px-4 py-2 font-medium text-slate-800 border-b border-slate-100">
+                  Text {rowIndex + 1}
+                </td>
+                {row.map((value, colIndex) => (
+                  <td
+                    key={colIndex}
+                    className="px-4 py-2 text-center border-b border-slate-100"
+                  >
+                    {rowIndex === colIndex
+                      ? '—'
+                      : value !== undefined
+                      ? value.toFixed(4)
+                      : 'N/A'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
             ))}
         </div>
     );
