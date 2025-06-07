@@ -1,5 +1,6 @@
 # بسم الله الرحمن الرحيم
 # OpenAI Embeddings Playground
+Hosted instance: https://open-ai-embeddings-playground.vercel.app/
 
 A simple web application for comparing OpenAI embeddings using various similarity methods. It offers a user-friendly interface to input text, select an OpenAI embedding model, choose similarity methods, and visualize comparison results.
 
